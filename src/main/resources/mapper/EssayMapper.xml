@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.like.dao.EssayMapper" >
+  <resultMap id="BaseResultMap" type="com.like.entity.Essay" >
+    <id column="essay_id" property="essayId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="dir_id" property="dirId" jdbcType="INTEGER" />
+    <result column="essay_state" property="essayState" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.like.entity.Essay" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    essay_id, user_id, title, dir_id, essay_state, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from essay
+    where essay_id = #{essayId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByEssayUserId" resultMap="ResultMapWithBLOBs" parameterType="com.like.entity.Essay" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from essay
+    where essay_id = #{essayId,jdbcType=INTEGER}
+    and user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectListByUserId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from essay
+    where user_id = #{userId,jdbcType=INTEGER}
+    order by create_time DESC
+  </select>
+  <select id="selectListByUserDirId" resultMap="ResultMapWithBLOBs" parameterType="com.like.entity.Directory" >
+    select
+    <include refid="Base_Column_List" />
+    from essay
+    where user_id = #{userId,jdbcType=INTEGER}
+    and dir_id = #{dirId,jdbcType=INTEGER}
+    order by create_time DESC
+  </select>
+  <select id="countEssayNumByUserId" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    select
+      count(1)
+    from essay
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from essay
+    where essay_id = #{essayId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByEssayUserId" parameterType="com.like.entity.Essay" >
+    delete from essay
+    where essay_id = #{essayId,jdbcType=INTEGER}
+    and user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.like.entity.Essay" >
+    insert into essay (essay_id, user_id, title, 
+      dir_id, essay_state, create_time, 
+      update_time, content)
+    values (#{essayId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{dirId,jdbcType=INTEGER}, #{essayState,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.like.entity.Essay" >
+    insert into essay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="essayId != null" >
+        essay_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="dirId != null" >
+        dir_id,
+      </if>
+      <if test="essayState != null" >
+        essay_state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="essayId != null" >
+        #{essayId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="dirId != null" >
+        #{dirId,jdbcType=INTEGER},
+      </if>
+      <if test="essayState != null" >
+        #{essayState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.like.entity.Essay" >
+    update essay
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="dirId != null" >
+        dir_id = #{dirId,jdbcType=INTEGER},
+      </if>
+      <if test="essayState != null" >
+        essay_state = #{essayState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where essay_id = #{essayId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.like.entity.Essay" >
+    update essay
+    set user_id = #{userId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      dir_id = #{dirId,jdbcType=INTEGER},
+      essay_state = #{essayState,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where essay_id = #{essayId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.like.entity.Essay" >
+    update essay
+    set user_id = #{userId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      dir_id = #{dirId,jdbcType=INTEGER},
+      essay_state = #{essayState,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where essay_id = #{essayId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByEssayUserId" parameterType="com.like.entity.Essay" >
+    update essay
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="dirId != null" >
+        dir_id = #{dirId,jdbcType=INTEGER},
+      </if>
+      <if test="essayState != null" >
+        essay_state = #{essayState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where essay_id = #{essayId,jdbcType=INTEGER}
+    and  user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

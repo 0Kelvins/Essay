@@ -1,0 +1,76 @@
+body {
+    background-size: cover;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAKHSURBVDhPJZPNjtQwEITL/5OZHcSB10bihrjxMAghJF6CPSAkEAdg2Z3ENl95Dx07TruquroTXn/4Os+9axs3nfab9hn0GLL61vQwk44QVMNQnJKIrKGDdcTIY6pwt46uModO6gpvPt7POPiWggKZRYc2gM99B0x64GTmrAnwrsgKKEARgME9rxWgNg/uD4W3n+7nIEnTEoI6yxHDYsvHobwfqkSDqKPqCHWlNqtGcrDqQR7RdxS++3w/A+qPXZTrkkiCwPAHcjLfzJIBOPebro83tbHrBKlVW0uk7H+3QweSTbIYU5I2jEoAmLWQ2QzexwLfufonV33fzvq5XfSbCwGSgjUZ9XctajtlRV+2iAVkRr9b4qJGMUqyiXyE4kA5T7Ho1/mir/Wqb5erfmx3+luqRoDk/ReaQrJVHn50A7tK9m6UjYcFrcLKxcO95w3fSma7D3UasqbBHkUO7ZrLzIBYYfXKhQSY311FJc/WuBK04KuvsS9JpSbdUB6je083VtkkRMrLXIpke814YcWuwrEB2sgpdS6CzNiIpiTPIn7Ggsw2u07MUaZ7zcPJCNTOqJCc+JZRaY9dgUu1Yo7XahEGOjEBFyKGmNZouNS2zHR3x/ojzNpIrhCcxtO6WJjNAvG2BLBP5DaGrRWNS7NC7DY9wIMooCecDvwdg1AlkXOMULINREKZbbBgWzZpoJvmhsat0gAnklG8UldEaSAa7556EwYM3elepyuxQZ6YOc67O+qZ5LvzOHvuKjkMNoIgcjMKf8cy390nKi13NYWz6RHBX/8V6McCyg7ISzS340nE4Z3w7B0+B/RUPSZT1zL1kriyf1WGXgBwB/jF3tHQZAKIPCyS9B/D5Dg6Skg2YwAAAABJRU5ErkJggg==");
+}
+.nav-main {
+    background-color: #ffffff !important;
+    filter:Alpha(opacity=40);
+    opacity:0.4;
+}
+.main-title {
+    color: #50a2ef;
+    margin: 8px auto 0px 100px;
+}
+
+/*中部内容*/
+.row {
+    display: table-cell;
+    width: 100%;
+    padding: 60px;
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+}
+
+/*登录主块*/
+.main {
+    max-width: 350px;
+    min-width: 350px;
+    position: fixed !important;
+    bottom: 30%;
+    left: 37%;
+    padding: 30px 30px 30px 30px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+    display: block;
+    float: none;
+    text-align: left;
+    line-height: 1.4285;
+}
+
+/*登录框头部*/
+.head {
+    display: inline-block;
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+.title {
+    font-size: 30px;
+    color: #8c8c8c;
+    float: left;
+    padding-bottom: 10px;
+}
+.operator {
+    color: #2aabd2;
+    font-size: 15px;
+    padding-top: 5px;
+}
+.tips {
+    display: block;
+    height: auto;
+    text-align: right;
+    color: #A94442;
+}
+
+/*登录框表单*/
+.body {
+
+}
+
+/*注册*/
+#registerMain {
+    display: none;
+}

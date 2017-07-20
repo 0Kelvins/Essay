@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.like.dao.CarouselMapper" >
+  <resultMap id="BaseResultMap" type="com.like.entity.Carousel" >
+    <id column="carousel_id" property="carouselId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    carousel_id, title, url, image_url, sequence, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from carousel
+    where carousel_id = #{carouselId,jdbcType=INTEGER}
+  </select>
+  <select id="selectCarouselList" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from carousel
+    order by sequence asc
+  </select>
+  <select id="selectAllCarousel" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from carousel
+    order by sequence asc
+  </select>
+  <select id="selectBySequence" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from carousel
+    where sequence = #{sequence,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from carousel
+    where carousel_id = #{carouselId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.like.entity.Carousel" >
+    insert into carousel (carousel_id, title, url, 
+      image_url, sequence, description
+      )
+    values (#{carouselId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{imageUrl,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.like.entity.Carousel" >
+    insert into carousel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carouselId != null" >
+        carousel_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="sequence != null" >
+        sequence,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carouselId != null" >
+        #{carouselId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.like.entity.Carousel" >
+    update carousel
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where carousel_id = #{carouselId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.like.entity.Carousel" >
+    update carousel
+    set title = #{title,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      sequence = #{sequence,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR}
+    where carousel_id = #{carouselId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.like.dao.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.like.entity.Comment" >
+    <id column="comment_id" property="commentId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="essay_id" property="essayId" jdbcType="INTEGER" />
+    <result column="comment_content" property="commentContent" jdbcType="VARCHAR" />
+    <result column="floor" property="floor" jdbcType="INTEGER" />
+    <result column="reply_floor" property="replyFloor" jdbcType="INTEGER" />
+    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="comment_state" property="commentState" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="EssayCommentResultMap" type="com.like.api.DTO.CommentDTO">
+    <association property="comment" javaType="com.like.entity.Comment" resultMap="BaseResultMap"/>
+    <association property="author" javaType="com.like.api.DTO.AuthorDTO">
+      <id property="userId" column="user_id"/>
+      <result property="username" column="username"/>
+      <result property="avatar" column="avatar"/>
+      <result property="gender" column="gender"/>
+      <result property="instruction" column="instruction"/>
+    </association>
+  </resultMap>
+  <resultMap id="UserCommentResultMap" type="com.like.api.DTO.UserCommentDTO">
+    <id column="id" property="id" javaType="java.lang.Integer" />
+    <result column="title" property="essayTitle" jdbcType="VARCHAR" />
+    <association property="comment" javaType="com.like.entity.Comment" resultMap="BaseResultMap"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    comment_id, user_id, essay_id, comment_content, floor, reply_floor, publish_time, 
+    comment_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </select>
+  <select id="selectReplyComment" resultMap="BaseResultMap"  parameterType="com.like.entity.Comment">
+    select
+    <include refid="Base_Column_List" />
+    from comment
+    where essay_id = #{essayId,jdbcType=INTEGER}
+      and floor = #{replyFloor,jdbcType=INTEGER}
+  </select>
+  <select id="selectCommentUserListByEssayId" resultMap="EssayCommentResultMap">
+    select
+      c.*,
+      u.username,
+      u.avatar,
+      u.gender,
+      u.instruction
+    from comment c left join user u on c.user_id = u.user_id
+    where 1 = 1
+    <if test="essayId != null" >
+      and essay_id = #{essayId,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="selectCommentListByUserId" resultMap="UserCommentResultMap">
+    select
+      c.comment_id as id,
+      e.title,
+      c.*
+    from comment c left join essay e on c.essay_id = e.essay_id
+    where c.user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="countCommentNumByUserId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select
+      count(1)
+    from comment
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="countCommentNumByEssayId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select
+      MAX(floor)
+    from comment
+    where essay_id = #{essayId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.like.entity.Comment" >
+    insert into comment (comment_id, user_id, essay_id, 
+      comment_content, floor, reply_floor, 
+      publish_time, comment_state)
+    values (#{commentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{essayId,jdbcType=INTEGER}, 
+      #{commentContent,jdbcType=VARCHAR}, #{floor,jdbcType=INTEGER}, #{replyFloor,jdbcType=INTEGER}, 
+      #{publishTime,jdbcType=TIMESTAMP}, #{commentState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.like.entity.Comment" >
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        comment_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="essayId != null" >
+        essay_id,
+      </if>
+      <if test="commentContent != null" >
+        comment_content,
+      </if>
+      <if test="floor != null" >
+        floor,
+      </if>
+      <if test="replyFloor != null" >
+        reply_floor,
+      </if>
+      <if test="publishTime != null" >
+        publish_time,
+      </if>
+      <if test="commentState != null" >
+        comment_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="essayId != null" >
+        #{essayId,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null" >
+        #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        #{floor,jdbcType=INTEGER},
+      </if>
+      <if test="replyFloor != null" >
+        #{replyFloor,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentState != null" >
+        #{commentState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.like.entity.Comment" >
+    update comment
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="essayId != null" >
+        essay_id = #{essayId,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null" >
+        comment_content = #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=INTEGER},
+      </if>
+      <if test="replyFloor != null" >
+        reply_floor = #{replyFloor,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentState != null" >
+        comment_state = #{commentState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.like.entity.Comment" >
+    update comment
+    set user_id = #{userId,jdbcType=INTEGER},
+      essay_id = #{essayId,jdbcType=INTEGER},
+      comment_content = #{commentContent,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=INTEGER},
+      reply_floor = #{replyFloor,jdbcType=INTEGER},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      comment_state = #{commentState,jdbcType=INTEGER}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+</mapper>

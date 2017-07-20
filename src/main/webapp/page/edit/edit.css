@@ -1,0 +1,195 @@
+* {
+    font-family: 'Microsoft YaHei', Verdana, sans-serif, 'SimSun';
+    font-size: 13px;
+}
+
+html body {
+    margin: 0;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+}
+
+.container, .row {
+    position: absolute;
+    left: 0;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.menu, .editArea {
+    height: 100%;
+}
+
+.container, .row, .menu, .directory, .file, .editArea {
+    padding: 0px !important;
+}
+
+/*文件夹列表*/
+.directory {
+    height: 100%;
+    color: #ffffff;
+    background-color: #3F3F3F;
+    padding-left: 20px !important;
+    padding-right: 10px;
+    overflow: auto;
+}
+
+/*页面按钮*/
+.menuBtn {
+    display: block;
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+
+}
+/*主页*/
+.homeBtn {
+    border: 1px solid #0084d6;
+    border-radius: 4px;
+    text-align: center;
+}
+a {
+    color: #d4d4d4;
+    text-decoration: none;
+}
+a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+/*新建目录表单*/
+.directory div {
+    position: relative;
+    left: auto;
+    top: auto;
+    height: auto;
+    width: auto;
+}
+.new-input {
+    padding: 0 20px 0 20px;
+    height: 35px;
+    box-sizing: border-box;
+    background-color: rgba(180, 180, 180, 0.2);
+    border-color: #2f2f2f;
+    color: #c8c8c8;
+}
+.create-dir-form .submit {
+    font-size: 15px;
+    float: right;
+    background: none;
+    border-color: #0abbd6;
+    border-radius: 5px;
+    color: #0abbd6;
+    margin: 5px 10px;
+    padding: 0px 10px
+}
+.create-dir-form.submit:hover {
+    background-color: rgba(52, 171, 32, 0.1)
+}
+/*目录列表*/
+.directory ul {
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+.directory ul li {
+    height: 45px;
+    list-style: none;
+    padding: 10px 10px 10px 20px;
+    font-size: 15px;
+}
+.directory ul li:hover, .directory ul li.selected, .directory a.selected {
+    background-color: #818181;
+}
+/*文章列表*/
+.file {
+    height: 100%;
+    position: relative;
+    display: block;
+    border-right: 1px solid #c8c8c8;
+    overflow: auto;
+}
+.file ul {
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+.file ul li {
+    height: 50px;
+    list-style: none;
+    padding: 10px;
+    font-size: 15px;
+    border-top: 1px solid #d9d9d9;
+}
+.file ul li:hover, .file ul li.selected {
+    background-color: #ececec;
+}
+/*新建文章按钮*/
+.file .menuBtn {
+    color: #797979;
+}
+
+.file .menuBtn:hover {
+    color: #383838;
+}
+
+/*编辑区*/
+.editArea .md-editor {
+    height: 85%;
+}
+
+.editArea .essay-head {
+    width: 100%;
+    height: 40px;
+    vertical-align: middle;
+    margin-top: 5px;
+}
+
+.editArea .essay-head .title {
+    font-size: 20px;
+    color: #b8b8b8;
+    padding-left: 5px;
+    display: block;
+    border: hidden;
+}
+
+.editArea .essay-head #saveBtn {
+    font-size: 15px;
+    background-color: #0abbd6;
+    color: #ffffff;
+    text-align: center;
+    height: 35px;
+    width: 80px;
+    float: right;
+}
+
+.md-editor > .md-header {
+    height: 40px;
+}
+
+.editArea textarea {
+    width: 100%;
+    height: 100% !important;
+    border: hidden !important;
+    padding: 0px;
+}
+
+#preview {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    border: hidden;
+}
+
+.editArea #tips {
+    height: 40px;
+}
+
+.tips {
+    color: #ffffff;
+    position: fixed;
+    bottom: 0px;
+}

@@ -1,0 +1,226 @@
+/*
+ * Globals
+ */
+body {
+    font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+    color: #333;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+    margin-top: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    color: #333;
+}
+
+/*
+ * Override Bootstrap's default container.
+ */
+
+@media (min-width: 1200px) {
+    .container {
+        width: 970px;
+    }
+}
+
+
+/*
+ * Masthead for nav
+ */
+
+.nav-main {
+    background-color: #2f2f2f;
+    -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+    box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+
+    height: 56px;
+}
+
+.nav-main a {
+    height: 55px;
+    text-decoration: none;
+    color: #b9b9b9;
+}
+
+.nav-main .logo {
+    float: left;
+    color: #b9b9b9;
+    font-size: 35px;
+    padding-left: 10px;
+    text-decoration: none;
+}
+
+.nav-main .container {
+    height: 56px;
+    font-size: 18px;
+}
+
+.nav-main .right-item {
+    float: right;
+    font-size: 15px;
+}
+/* Nav links */
+.nav-main-item {
+    position: relative;
+    display: inline-block;
+    padding: 15px;
+    font-weight: 500;
+    color: #b9b9b9;
+    vertical-align: middle;
+}
+.nav-main-item:hover,
+.nav-main-item:focus {
+    color: #fff;
+    text-decoration: none;
+}
+.nav-main .glyphicon-pencil {
+    padding-right:5px;
+    border-right:1px solid #eeeeee;
+}
+
+/* Active state gets a caret at the bottom */
+.nav-main .active {
+    color: #fff;
+    background-color: #6b6b6b;
+}
+.nav-main .active:after {
+    background-color: #383838;
+}
+
+img.avatar {
+    vertical-align: middle;
+    left: 0;
+    top: 0;
+    margin: -10px !important;
+    border: 1px solid #b2b2b2;
+    border-radius: 18px;
+    height: 36px;
+    width: 36px;
+}
+
+.nav-main-item .dropdown-menu {
+    color: #4c4c4c;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,.1));
+    -webkit-filter: drop-shadow(0 2px 8px rgba(0,0,0,.1));
+    padding: 0;
+}
+.nav-main-item ul li a {
+    height: auto;
+    line-height: 30px;
+    text-align: center;
+}
+
+.nav-main-item ul li:hover {
+    background-color: #e5e5e5;
+}
+
+.nav-main .nav-btn {
+    border: 1px solid rgba(233, 233, 233, 0.7);
+    border-radius: 4px;
+    margin: 5px 5px 0 15px;
+    width: 100px;
+    height: 38px !important;
+    text-align: center;
+    padding: 8px;
+}
+
+.nav-main .write {
+    background-color: #ffffff;
+    color: #50A2EF;
+}
+
+/*
+ * Footer
+ */
+
+.home-footer {
+    padding: 40px 0;
+    color: #999;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-top: 1px solid #e5e5e5;
+}
+.home-footer p:last-child {
+    margin-bottom: 0;
+}
+
+/*返回顶部按钮*/
+
+ol, ul {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+ul {
+    padding-left: 0px;
+}
+.side-tool > ul {
+    list-style: none;
+}
+li {
+    line-height: 20px;
+}
+
+.side-tool {
+    display: none;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 9;
+}
+
+.side-tool > ul > li {
+    border: 1px solid #dcdcdc;
+    border-bottom: none;
+    background-color: #fff;
+    transition: .1s ease-in;
+    -webkit-transition: .1s ease-in;
+    -moz-transition: .1s ease-in;
+    -o-transition: .1s ease-in;
+    -ms-transition: .1s ease-in;
+}
+.side-tool > ul > li:last-child {
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.side-tool > ul .function-button, .side-tool > ul .js-submit-button {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    display: block;
+}
+.icon-font {
+    color: #b8b8b8;
+}
+
+.side-tool > ul .function-button i, .side-tool > ul .js-submit-button i {
+    padding-top: 16px;
+    font-size: 20px;
+    display: block;
+}
+
+.modal-dialog {
+    width: auto;
+    margin: 10px;
+}
+@media all and (min-width:768px) {
+    .modal-dialog {
+        width: 600px;
+        margin: 50px auto;
+    }
+}
+
+
+.alert {
+    display: none;
+    position: fixed;
+    bottom: 0px;
+    right: 5px;
+    z-index: 9;
+}

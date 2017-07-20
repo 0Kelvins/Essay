@@ -1,0 +1,82 @@
+.plate-list {
+    margin-top: 100px;
+    padding: 15px;
+}
+
+.plate-list .plate {
+    display: inline-block;
+    margin: 0 18px 18px 0;
+    padding: 5px;
+    min-height: 32px;
+    background-color: #f7f7f7;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.plate-list .plate a {
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.plate-title {
+    color: #8c8c8c;
+}
+
+/*文章列表*/
+.blog-list {
+    min-height: 1000px;
+}
+.blog-post {
+    margin-bottom: 5px;
+}
+.blog-post .blog-post-title {
+    margin: 0 0 5px 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.blog-post .blog-post-title a {
+    color: #2f2f2f;
+}
+.blog-post .blog-author {
+    font-size: 13px;
+    text-decoration: none;
+}
+.blog-post .blog-author .avatar {
+    border: 1px solid #b2b2b2;
+    height: 32px;
+    width: 32px;
+    margin: 0 5px 0 0px !important;
+    vertical-align: middle;
+}
+.blog-post .blog-author .author {
+    vertical-align: middle;
+    margin-right: 5px;
+    color: #353535;
+}
+.blog-post .blog-author .blog-post-meta {
+    margin-bottom: 20px;
+    color: #999;
+    font-size: 13px;
+    vertical-align: middle;
+}
+.blog-post blockquote {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #333333;
+}
+
+/* Pagination */
+.pager {
+    margin-bottom: 60px;
+    text-align: left;
+}
+.pager > li > a {
+    width: 140px;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px;
+}

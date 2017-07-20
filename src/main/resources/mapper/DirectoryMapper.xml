@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.like.dao.DirectoryMapper" >
+  <resultMap id="BaseResultMap" type="com.like.entity.Directory" >
+    <id column="dir_id" property="dirId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="dir_name" property="dirName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dir_id, user_id, dir_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from directory
+    where dir_id = #{dirId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from directory
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from directory
+    where dir_id = #{dirId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByDirUserId" parameterType="com.like.entity.Directory" >
+    delete from directory
+    where dir_id = #{dirId,jdbcType=INTEGER}
+    and user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.like.entity.Directory" >
+    insert into directory (dir_id, user_id, dir_name
+      )
+    values (#{dirId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{dirName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.like.entity.Directory" >
+    insert into directory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dirId != null" >
+        dir_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="dirName != null" >
+        dir_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dirId != null" >
+        #{dirId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="dirName != null" >
+        #{dirName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.like.entity.Directory" >
+    update directory
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="dirName != null" >
+        dir_name = #{dirName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dir_id = #{dirId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.like.entity.Directory" >
+    update directory
+    set user_id = #{userId,jdbcType=INTEGER},
+      dir_name = #{dirName,jdbcType=VARCHAR}
+    where dir_id = #{dirId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByDirUserId" parameterType="com.like.entity.Directory" >
+    update directory
+    set dir_name = #{dirName,jdbcType=VARCHAR}
+    where dir_id = #{dirId,jdbcType=INTEGER}
+    and user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

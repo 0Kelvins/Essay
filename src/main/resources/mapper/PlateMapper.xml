@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.like.dao.PlateMapper" >
+  <resultMap id="BaseResultMap" type="com.like.entity.Plate" >
+    <id column="plate_id" property="plateId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="essay_num" property="essayNum" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    plate_id, name, essay_num, state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from plate
+    where plate_id = #{plateId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByEssayNum" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from plate
+    where state = 1000
+    order by essay_num desc
+  </select>
+  <select id="selectPlateList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from plate
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from plate
+    where plate_id = #{plateId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.like.entity.Plate" >
+    insert into plate (plate_id, name, essay_num, 
+      state)
+    values (#{plateId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{essayNum,jdbcType=INTEGER}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.like.entity.Plate" >
+    insert into plate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="plateId != null" >
+        plate_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="essayNum != null" >
+        essay_num,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="plateId != null" >
+        #{plateId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="essayNum != null" >
+        #{essayNum,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.like.entity.Plate" >
+    update plate
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="essayNum != null" >
+        essay_num = #{essayNum,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where plate_id = #{plateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.like.entity.Plate" >
+    update plate
+    set name = #{name,jdbcType=VARCHAR},
+      essay_num = #{essayNum,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER}
+    where plate_id = #{plateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateAddEssayNum">
+    update plate
+    set essay_num = essay_num + #{numToAdd,jdbcType=INTEGER}
+    where plate_id = #{plateId,jdbcType=INTEGER}
+  </update>
+  <update id="openById" parameterType="java.lang.Integer" >
+    update plate
+    set state = 1000
+    where plate_id = #{plateId,jdbcType=INTEGER}
+  </update>
+  <update id="closeById" parameterType="java.lang.Integer" >
+    update plate
+    set state = 1400
+    where plate_id = #{plateId,jdbcType=INTEGER}
+  </update>
+
+</mapper>
